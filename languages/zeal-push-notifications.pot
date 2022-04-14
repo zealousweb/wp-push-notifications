@@ -1,0 +1,166 @@
+# Copyright (C) 2022 ZealousWeb
+# This file is distributed under the same license as the ZealPush Notification For WordPress plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: ZealPush Notification For WordPress 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/zeal-push-notifications\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-04-12T15:51:18+02:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: zeal-push-notification\n"
+
+#. Plugin Name of the plugin
+msgid "ZealPush Notification For WordPress"
+msgstr ""
+
+#. Description of the plugin
+msgid "Best platform for sending web push notifications."
+msgstr ""
+
+#. Author of the plugin
+msgid "ZealousWeb"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.zealousweb.com"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:64
+#: inc/admin/class.zpn.admin.action.php:65
+msgid "Push Notification"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:265
+#: inc/admin/class.zpn.admin.action.php:312
+#: inc/admin/class.zpn.admin.action.php:422
+msgid "Sorry, your nonce was not correct. Please try again."
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:291
+msgid "Fields update successfully."
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:295
+msgid "Fill all required fields."
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:386
+msgid "Push notification send sucessfully...!"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:392
+msgid "No user accept and allow for site notification...!"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:398
+msgid "For send notification please configure your all required fields first..!"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.action.php:404
+msgid "Please fill out all required fields...!"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.filter.php:55
+msgid "Settings Page"
+msgstr ""
+
+#: inc/admin/class.zpn.admin.filter.php:58
+msgid "Document Link"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:30
+msgid "Web Push Notification"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:32
+msgid "Setup"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:33
+msgid "Manual Push"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:34
+msgid "Configuration"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:44
+#: inc/admin/template/zpn.template.php:85
+msgid ""
+"To create firebase account, Please follow this link( <a href=\"https://console.firebase.google.com/u/0/\" target=\"_blank\">URL</a> ) and choose Web Application type from the list.\n"
+"\t\tYou will get below details once you configured it correctly."
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:53
+#: inc/admin/template/zpn.template.php:94
+msgid "Server key"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:57
+#: inc/admin/template/zpn.template.php:98
+msgid "API key"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:61
+#: inc/admin/template/zpn.template.php:102
+msgid "Project Id"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:65
+#: inc/admin/template/zpn.template.php:106
+msgid "Sender Id"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:69
+#: inc/admin/template/zpn.template.php:110
+msgid "App Id"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:135
+msgid "Notification Title"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:139
+msgid "Notification Description"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:143
+msgid "Notification Link"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:147
+#: inc/admin/template/zpn.template.php:205
+msgid "Notification Icon"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:147
+#: inc/admin/template/zpn.template.php:157
+msgid " Support only png, jpg, jpeg image"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:157
+#: inc/admin/template/zpn.template.php:225
+msgid "Notification Image"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:180
+msgid "New Post Settings"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:193
+msgid "Enable Web Push"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:198
+msgid "Notification Message"
+msgstr ""
+
+#: inc/admin/template/zpn.template.php:208
+#: inc/admin/template/zpn.template.php:228
+msgid "Upload image"
+msgstr ""
