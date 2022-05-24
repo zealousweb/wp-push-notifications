@@ -40,13 +40,44 @@
 		button.hide().prev().html('Upload');
 	});
 
-	// Confirmation before submit notification
+	// Check image type before submit notification
 	$(document).on('submit', '.send_notification', function() {
 		if(confirm('Do you really want to send the notification ?')) {
 			return true;
 		}
 		return false;
 	});
+
+	jQuery( '#wpn_post_icon' ).on( 'mouseenter click', function() {
+
+		jQuery( 'body .wp-pointer-buttons .close' ).trigger( 'click' );
+		jQuery( '#wpn_post_icon' ).pointer({
+			pointerClass: 'wp-pointer zealwpn-pointer',
+			content: translate_string_wpn.wpn_post_icon,
+			position: 'left center',
+		} ).pointer('open');
+	});
+
+	jQuery( '#wpn_post_image' ).on( 'mouseenter click', function() {
+
+		jQuery( 'body .wp-pointer-buttons .close' ).trigger( 'click' );
+		jQuery( '#wpn_post_image' ).pointer({
+			pointerClass: 'wp-pointer zealwpn-pointer',
+			content: translate_string_wpn.wpn_post_image,
+			position: 'left center',
+		} ).pointer('open');
+	});
+
+	jQuery( '#wpn_notification_desc' ).on( 'mouseenter click', function() {
+
+		jQuery( 'body .wp-pointer-buttons .close' ).trigger( 'click' );
+		jQuery( '#wpn_notification_desc' ).pointer({
+			pointerClass: 'wp-pointer zealwpn-pointer',
+			content: translate_string_wpn.wpn_notification_desc,
+			position: 'left center',
+		} ).pointer('open');
+	});
+
 	
 
 } )( jQuery );
