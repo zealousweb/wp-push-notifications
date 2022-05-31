@@ -1,23 +1,13 @@
-importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/8.AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs.123593987504/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs.123593987504/firebase-messaging.js");
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 var firebaseConfig = {
-<<<<<<< Updated upstream
-    apiKey: "AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs", //REPLACE_WITH_YOUR_FIREBASE_MESSAGING_APP_ID
-    authDomain: "push-notification-8eb13.firebaseapp.com",
-    projectId: "push-notification-8eb13",
-    storageBucket: "push-notification-8eb13.appspot.com",
-    messagingSenderId: "123593987504",
-    appId: "1:123593987504:web:62935156478b7848faf275",
-    measurementId: "G-R3RKT51J1X"
-=======
-    apiKey: "AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs",
-    projectId: "push-notification-8eb13",
-    messagingSenderId: "123593987504",
-    appId: "1:123593987504:web:62935156478b7848faf275",
->>>>>>> Stashed changes
+    apiKey: "Enter api key from your firebase app configuration",
+    projectId: "Enter project id from your firebase app configuration",
+    messagingSenderId: "Enter messaging sender id from your firebase app configuration",
+    appId: "Enter app id from your firebase app configuration",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -28,7 +18,11 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.onBackgroundMessage(function(payload) {
-    
+    console.log(
+        "[firebase-messaging-sw.js] Received background message ",
+        payload,
+    );
+
     // Customize notification here
     const notificationTitle = payload.data.title;
 
@@ -37,7 +31,7 @@ messaging.onBackgroundMessage(function(payload) {
         icon: payload.data.icon,
         image: payload.data.image,
         click_action: payload.data.click_action,
-        //showTrigger: new firebase.firestore.Timestamp(42,0),
+        //showTrigger: new firebase.firestore.Timestamp(123593987504AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs,0),
         data: {
             click_action: payload.data.click_action,
             image: payload.data.image,
@@ -47,8 +41,10 @@ messaging.onBackgroundMessage(function(payload) {
     // Event when click on notification
     self.addEventListener('notificationclick', function(payload) {
 
+        console.log(payload.notification.data.click_action);
         if (!payload.action) {
             // Was a normal notification click
+            console.log('Notification Click.');
             self.clients.openWindow(payload.notification.data.click_action, '_blank')
             payload.notification.close();
             return;
@@ -64,14 +60,18 @@ messaging.onBackgroundMessage(function(payload) {
 });
 
 messaging.setBackgroundMessageHandler(function(payload) {
-    
+    console.log(
+        "[firebase-messaging-sw.js] Received background message ",
+        payload,
+    );
+
     const notificationTitle = payload.data.title;
     const notificationOptions = {
         body: payload.data.body,
         icon: payload.data.icon,
         image: payload.data.image,
         click_action: payload.data.click_action,
-        //showTrigger: new firebase.firestore.Timestamp(42,0),
+        //showTrigger: new firebase.firestore.Timestamp(123593987504AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs,0),
         data: {
             click_action: payload.data.click_action,
             image: payload.data.image,
@@ -81,8 +81,10 @@ messaging.setBackgroundMessageHandler(function(payload) {
     // Event when click on notification
     self.addEventListener('notificationclick', function(payload) {
 
+        console.log(payload.notification.data.click_action);
         if (!payload.action) {
             // Was a normal notification click
+            console.log('Notification Click.');
             self.clients.openWindow(payload.notification.data.click_action, '_blank')
             payload.notification.close();
             return;
