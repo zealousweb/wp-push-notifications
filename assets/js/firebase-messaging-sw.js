@@ -4,6 +4,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js");
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 var firebaseConfig = {
+<<<<<<< Updated upstream
     apiKey: "AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs", //REPLACE_WITH_YOUR_FIREBASE_MESSAGING_APP_ID
     authDomain: "push-notification-8eb13.firebaseapp.com",
     projectId: "push-notification-8eb13",
@@ -11,6 +12,12 @@ var firebaseConfig = {
     messagingSenderId: "123593987504",
     appId: "1:123593987504:web:62935156478b7848faf275",
     measurementId: "G-R3RKT51J1X"
+=======
+    apiKey: "AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs",
+    projectId: "push-notification-8eb13",
+    messagingSenderId: "123593987504",
+    appId: "1:123593987504:web:62935156478b7848faf275",
+>>>>>>> Stashed changes
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
