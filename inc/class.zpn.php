@@ -138,8 +138,39 @@ if ( !class_exists( 'ZPN' ) ) {
 
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			dbDelta( $sql );
-		}
+			
+			$filename = ZPN_DIR . '/assets/js/firebase-messaging-sw.js';
+			
+			$notification_apiKey     = sanitize_text_field( get_option( 'notification_apiKey' ) );
+			$notification_projectId  = sanitize_text_field( get_option( 'notification_projectId' ) );
+			$notification_senderId   = sanitize_text_field( get_option( 'notification_senderId' ) );
+			$notification_appId      = sanitize_text_field( get_option( 'notification_appId' ) );
 
+			if( $notification_apiKey ) {
+				$this->replace_sw_file_string( $filename, 'Enter api key from your firebase app configuration', $notification_apiKey );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter api key from your firebase app configuration', 'Enter api key from your firebase app configuration' );
+			}
+
+			if( $notification_projectId ) {
+				$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', $notification_projectId );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', 'Enter project id from your firebase app configuration' );
+			}
+
+			if( $notification_senderId ) {
+				$this->replace_sw_file_string( $filename, 'Enter messaging sender id from your firebase app configuration', $notification_senderId );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter messaging sender id from your firebase app configuration', 'Enter messaging sender id from your firebase app configuration' );
+			}
+
+			if( $notification_appId ) {
+				$this->replace_sw_file_string( $filename, 'Enter app id from your firebase app configuration', $notification_appId );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter app id from your firebase app configuration', 'Enter app id from your firebase app configuration' );
+			}
+
+		}
 
 		/**
 		 * Action: action__notification_token
@@ -224,20 +255,20 @@ if ( !class_exists( 'ZPN' ) ) {
 		 * - Used for get current user system.
 		 *
 		 */
-		function get_the_browser(){
-			if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
+		function get_the_browser() {
+			if( strpos( $_SERVER['HTTP_USER_AGENT'], 'MSIE' ) !== false )
 				return 'Internet explorer';
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Trident' ) !== false )
 				return 'Internet explorer';
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Firefox' ) !== false )
 				return 'Mozilla Firefox';
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Chrome' ) !== false )
 				return 'Google Chrome';
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Opera Mini' ) !== false )
 				return "Opera Mini";
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Opera' ) !== false )
 				return "Opera";
-			elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== false)
+			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Safari' ) !== false )
 				return "Safari";
 			else
 			return 'Other';
@@ -249,13 +280,25 @@ if ( !class_exists( 'ZPN' ) ) {
 		 * - Used for get current user system.
 		 *
 		 */
-		function generate_unique_id($length) {
+		function generate_unique_id( $length ) {
 			$key = '';
 			$keys = array_merge(range(0, 9), range('a', 'z'));
 			for ($i = 0; $i < $length; $i++) {
 				$key .= $keys[array_rand($keys)];
 			}
 			return $key;
+		}
+
+		/**
+		 * Replace string in file
+		 *
+		 * @return void
+		 */
+		function replace_sw_file_string( $filename, $string_to_replace, $replace_with ) {
+			$content        = file_get_contents( $filename );
+			$content_chunks = explode( $string_to_replace, $content );
+			$content        = implode( $replace_with, $content_chunks );
+			file_put_contents( $filename, $content );
 		}
 	}
 }

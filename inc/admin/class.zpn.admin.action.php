@@ -26,6 +26,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			add_action( 'admin_menu'     , array( $this, 'action__add_menu' ) );
 			add_action( 'add_meta_boxes' , array( $this, 'action__notification_meta_boxes' ) );
 			add_action( 'publish_post'   , array( $this, 'action__send_notification' ) );
+			add_action( 'publish_page'   , array( $this, 'action__send_notification' ) );
 		}
 
 		/*
@@ -111,6 +112,50 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			}
 		}
 
+		/**
+		 * Plugin__upgrade_function function
+		 *
+		 * @param [type] $upgrader_object
+		 * @param [type] $options
+		 * @return void
+		 */
+		function plugin__upgrade_function( $upgrader_object, $options ) {
+			
+			$current_plugin_path_name = ZPN_PLUGIN_BASENAME;
+		
+			if ($options['action'] == 'update' && $options['type'] == 'plugin' ) {
+				
+				foreach($options['plugins'] as $each_plugin) {
+
+					if ( $each_plugin  == $current_plugin_path_name ) {
+
+						$filename = ZPN_DIR . '/assets/js/firebase-messaging-sw.js';
+
+						$notification_apiKey     = sanitize_text_field( get_option( 'notification_apiKey' ) );
+						$notification_projectId  = sanitize_text_field( get_option( 'notification_projectId' ) );
+						$notification_senderId   = sanitize_text_field( get_option( 'notification_senderId' ) );
+						$notification_appId      = sanitize_text_field( get_option( 'notification_appId' ) );
+
+						if( $notification_apiKey ) {
+							$this->replace_sw_file_string( $filename, 'Enter api key from your firebase app configuration', $notification_apiKey );
+						}
+
+						if( $notification_projectId ) {
+							$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', $notification_projectId );
+						}
+
+						if( $notification_senderId ) {
+							$this->replace_sw_file_string( $filename, 'Enter messaging sender id from your firebase app configuration', $notification_senderId );
+						}
+
+						if( $notification_appId ) {
+							$this->replace_sw_file_string( $filename, 'Enter app id from your firebase app configuration', $notification_appId );
+						}
+					}
+				}
+			}
+		}
+
 		/*
 		######## ##     ## ##    ##  ######  ######## ####  #######  ##    ##  ######
 		##       ##     ## ###   ## ##    ##    ##     ##  ##     ## ###   ## ##    ##
@@ -121,6 +166,19 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 		##        #######  ##    ##  ######     ##    ####  #######  ##    ##  ######
 		*/
 
+		/**
+		 * Replace string in file
+		 *
+		 * @return void
+		 */
+		function replace_sw_file_string( $filename, $string_to_replace, $replace_with ) {
+			$content        = file_get_contents( $filename );
+			$content_chunks = explode( $string_to_replace, $content );
+			$content        = implode( $replace_with, $content_chunks );
+			file_put_contents( $filename, $content );
+		}
+
+		
 		/**
 		 * Output the HTML for the metabox.
 		 */
@@ -160,7 +218,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 				if ( get_option( 'wpn_enable_for_post' ) && ! empty( get_option( 'wpn_enable_for_post' ) ) ) {
 					
-					$post_title = get_the_title( $post_id );					
+					$post_title = get_the_title( $post_id );
 
 					if( has_excerpt( $post_id ) ) {
 						$post_message = wp_trim_words( get_the_excerpt( $post_id ), 160, '...' );
@@ -171,19 +229,19 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 					}
 
 					if ( get_option( 'wpn_post_icon' ) ) {
-						$post_icon = wp_get_attachment_image_url( get_option( 'wpn_post_icon' ), 'full' );
+						$post_icon = wp_get_attachment_image_url( get_option( 'wpn_post_icon' ), 'thumbnail' );
 					} elseif( get_option( 'wpn_post_image' ) ) {
-						$post_icon = wp_get_attachment_image_url( get_option( 'wpn_post_image' ), 'full' );
+						$post_icon = wp_get_attachment_image_url( get_option( 'wpn_post_image' ), 'thumbnail' );
 					}else{
-						$post_icon = get_the_post_thumbnail_url( $post_id, array( 256, 256 ) );
-					}		
+						$post_icon = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
+					}	
 
 					if( has_post_thumbnail( $post_id ) ) {
-						$post_image = get_the_post_thumbnail_url( $post_id, array( 256, 256 ) );
+						$post_image = get_the_post_thumbnail_url( $post_id, 'medium_large' );
 					} elseif ( get_option( 'wpn_post_image' ) ) {
-						$post_image = wp_get_attachment_image_url( get_option( 'wpn_post_image' ), 'full' );
+						$post_image = wp_get_attachment_image_url( get_option( 'wpn_post_image' ),  'medium_large' );
 					} else {
-						$post_image = wp_get_attachment_image_url( get_option( 'wpn_post_image' ), 'full' );
+						$post_image = wp_get_attachment_image_url( get_option( 'wpn_post_image' ), 'medium_large' );
 					}
 
 				} else {
@@ -200,6 +258,8 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 					'image'        => $post_image,
 					'click_action' => get_the_permalink( $post_id ),
 				);
+
+				//echo "<pre>";print_r($msg);exit;
 
 				$payload = array(
 					'registration_ids' => $browser_token,
@@ -263,11 +323,44 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				! empty( $notification_senderId ) &&
 				! empty( $notification_appId )
 				) {
+
+					$filename = ZPN_DIR . '/assets/js/firebase-messaging-sw.js';
+			
+					$notification_apiKey_old     = sanitize_text_field( get_option( 'notification_apiKey' ) );
+					$notification_projectId_old  = sanitize_text_field( get_option( 'notification_projectId' ) );
+					$notification_senderId_old   = sanitize_text_field( get_option( 'notification_senderId' ) );
+					$notification_appId_old      = sanitize_text_field( get_option( 'notification_appId' ) );
+
+					if( $notification_apiKey_old ) {
+						$this->replace_sw_file_string( $filename, $notification_apiKey_old, $notification_apiKey );						
+					} else {
+						$this->replace_sw_file_string( $filename, 'Enter api key from your firebase app configuration', $notification_apiKey );
+					}
+		
+					if( $notification_projectId_old ) {
+						$this->replace_sw_file_string( $filename, $notification_projectId_old, $notification_projectId );
+					} else {
+						$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', $notification_projectId );
+					}
+		
+					if( $notification_senderId_old ) {
+						$this->replace_sw_file_string( $filename, $notification_senderId_old, $notification_senderId );
+					} else {
+						$this->replace_sw_file_string( $filename, 'Enter messaging sender id from your firebase app configuration', $notification_senderId );
+					}
+		
+					if( $notification_appId_old ) {
+						$this->replace_sw_file_string( $filename, $notification_appId_old, $notification_appId );
+					} else {
+						$this->replace_sw_file_string( $filename, 'Enter app id from your firebase app configuration', $notification_appId );
+					}					
+
 					update_option( 'notification_server_key', $notification_server_key );
 					update_option( 'notification_apiKey', $notification_apiKey );
 					update_option( 'notification_projectId', $notification_projectId );
 					update_option( 'notification_senderId', $notification_senderId );
 					update_option( 'notification_appId', $notification_appId );
+
 
 					echo '<div class="updated">
 					<p>' . __( 'Fields update successfully.', 'zeal-push-notification' ) . '</p>
