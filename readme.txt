@@ -2,9 +2,9 @@
 Contributors: zealopensource
 Tags: web push notifications, push notifications, push notification, chrome push, firefox push, notification, notifications, web push, gcm, push messages, desktop push messages, browser push notifications, free web push notifications, free web notifications, free notifications
 Requires at least: 5.0
-Tested up to: 5.7.1
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 5.9.3
+Stable tag: 6.0
 License: GPLv3 or later License
 Version: 1.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
