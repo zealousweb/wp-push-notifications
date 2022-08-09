@@ -5,7 +5,7 @@
  * Handles the Library functionality.
  *
  * @package WordPress
- * @package ZealPush Notification For WordPress
+ * @package Push Notifications For Web
  * @since 1.0
  */
 

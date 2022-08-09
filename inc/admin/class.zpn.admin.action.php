@@ -5,7 +5,7 @@
  * Handles the admin functionality.
  *
  * @package WordPress
- * @package ZealPush Notification For WordPress
+ * @package Push Notifications For Web
  * @since 1.0
  */
 
@@ -62,8 +62,8 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 		 */
 		function action__add_menu() {
 			add_menu_page(
-				__( 'Push Notification', 'zeal-push-notification' ),
-				__( 'Push Notification', 'zeal-push-notification' ),
+				__( 'Push Notification', 'push-notifications-for-web' ),
+				__( 'Push Notification', 'push-notifications-for-web' ),
 				'edit_posts',
 				'web_push',
 				array( $this, 'page_callback_function' ),
@@ -304,7 +304,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			! wp_verify_nonce( $_POST['setting_save'], 'notification_setting_save' )
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'zeal-push-notification' ) . '</p>
+				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 
@@ -363,11 +363,11 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 
 					echo '<div class="updated">
-					<p>' . __( 'Fields update successfully.', 'zeal-push-notification' ) . '</p>
+					<p>' . __( 'Fields update successfully.', 'push-notifications-for-web' ) . '</p>
 					</div>';
 				} else {
 					echo '<div class="error">
-					<p>' . __( 'Fill all required fields.', 'zeal-push-notification' ) . '</p>
+					<p>' . __( 'Fill all required fields.', 'push-notifications-for-web' ) . '</p>
 					</div>';
 				}
 			}
@@ -384,7 +384,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			! wp_verify_nonce( $_POST['notification_fields'], 'notification_fields_update' )
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'zeal-push-notification' ) . '</p>
+				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 
@@ -458,25 +458,25 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 						} else {
 
 							echo '<div class="updated">' .
-							'<p>' . __( 'Push notification send successfully...!', 'zeal-push-notification' ) . '</p>' .
+							'<p>' . __( 'Push notification send successfully...!', 'push-notifications-for-web' ) . '</p>' .
 							'</div>';
 						}
 					} else {
 
 						echo '<div class="error">
-						<p>' . __( 'No user accept and allow for site notification...!', 'zeal-push-notification' ) . '</p>
+						<p>' . __( 'No user accept and allow for site notification...!', 'push-notifications-for-web' ) . '</p>
 						</div>';
 					}
 				} elseif ( $validate_fields ) {
 
 					echo '<div class="error">' .
-					'<p>' . __( 'For send notification please configure your all required fields first..!', 'zeal-push-notification' ) . '</p>' .
+					'<p>' . __( 'For send notification please configure your all required fields first..!', 'push-notifications-for-web' ) . '</p>' .
 					'</div>';
 
 				} else {
 
 					echo '<div class="error">
-					<p>' . __( 'Please fill out all required fields...!', 'zeal-push-notification' ) . '</p>
+					<p>' . __( 'Please fill out all required fields...!', 'push-notifications-for-web' ) . '</p>
 					</div>';
 
 				}
@@ -494,7 +494,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			! wp_verify_nonce( $_POST['new_post_configuration'], 'post_configuration_fields' )
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'zeal-push-notification' ) . '</p>
+				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 

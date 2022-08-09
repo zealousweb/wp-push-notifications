@@ -5,7 +5,7 @@
  * Handles the admin functionality.
  *
  * @package WordPress
- * @subpackage ZealPush Notification For WordPress
+ * @subpackage Push Notifications For Web
  * @since 1.0
  */
 

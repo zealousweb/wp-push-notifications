@@ -84,18 +84,18 @@ if ( !class_exists( 'ZPN' ) ) {
 			}
 
 			# Traditional WordPress plugin locale filter
-			$locale = apply_filters( 'plugin_locale',  $get_locale, 'zeal-push-notification' );
-			$mofile = sprintf( '%1$s-%2$s.mo', 'zeal-push-notification', $locale );
+			$locale = apply_filters( 'plugin_locale',  $get_locale, 'push-notifications-for-web' );
+			$mofile = sprintf( '%1$s-%2$s.mo', 'push-notifications-for-web', $locale );
 
 			# Setup paths to current locale file
 			$mofile_global = WP_LANG_DIR . '/plugins/' . basename( ZPN_DIR ) . '/' . $mofile;
 
 			if ( file_exists( $mofile_global ) ) {
 				# Look in global /wp-content/languages/plugin-name folder
-				load_textdomain( 'zeal-push-notification', $mofile_global );
+				load_textdomain( 'push-notifications-for-web', $mofile_global );
 			} else {
 				# Load the default language files
-				load_plugin_textdomain( 'zeal-push-notification', false, $ZPN_lang_dir );
+				load_plugin_textdomain( 'push-notifications-for-web', false, $ZPN_lang_dir );
 			}
 		}
 
@@ -183,8 +183,8 @@ if ( !class_exists( 'ZPN' ) ) {
 			global $wpdb;
 
 			$table_name  = $wpdb->prefix."web_notification";
-			$token = $_POST['token'];
-			$unique_id = $_POST['unique_id'];
+			$token       = sanitize_text_field( $_POST['token'] );
+			$unique_id   = sanitize_text_field( $_POST['unique_id'] );
 			$device_name = $this->get_the_browser();
 
 			if( $token ) {
@@ -205,7 +205,7 @@ if ( !class_exists( 'ZPN' ) ) {
 					);
 					$lastid = $wpdb->insert_id;
 					$curid = $unique_check_id[0]['id'];
-					echo $unique_check_id[0]['unique_id'].$curid;
+					echo esc_html( $unique_check_id[0]['unique_id'].$curid );
 
 				}else{
 
@@ -216,7 +216,7 @@ if ( !class_exists( 'ZPN' ) ) {
 						'unique_id' => $unique_id,
 					));
 					$lastid = $wpdb->insert_id;
-					echo $unique_id.$lastid;
+					echo esc_html( $unique_id.$lastid );
 				}
 			}
 			die;
