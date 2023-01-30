@@ -7,3 +7,5 @@ Push Notifications For Web, you can send browser push notifications to your site
 3. With your FTP program, upload the plugin folder to the wp-content/plugins folder in your WordPress directory online
 4. Go to the Plugin screen and find the newly uploaded Plugin in the list.
 5. Click ‘Activate Plugin’ to activate it.
+
+# How To Use
