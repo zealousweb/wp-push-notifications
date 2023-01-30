@@ -29,10 +29,10 @@ To create firebase account, Please follow below steps
 Send Manual Push 
 ![Screenshot](resources/img/image-2.png)
 
-Post and Page Push Notification Option.
+Configuration New post Settings.
 ![Screenshot](resources/img/image-4.png)
 
-Configuration New post Settings.
+Post and Page Push Notification Option.
 ![Screenshot](resources/img/image-3.png)
 
 # Getting Help
