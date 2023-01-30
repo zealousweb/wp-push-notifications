@@ -13,7 +13,7 @@ You can configure the plugin to automatically send push notification to your sub
 5. Click ‘Activate Plugin’ to activate it.
 
 # How To Use
-Step 1 : You have to configure it from wp-admin > Push Notification >
+You have to configure it from wp-admin > Push Notification >
 
 You will find a new tab “Push Notification”.
 
@@ -29,12 +29,11 @@ To create firebase account, Please follow below steps
 Send Manual Push 
 ![Screenshot](resources/img/image-2.png)
 
-Configuration New post Settings.
-![Screenshot](resources/img/image-3.png)
-
 Post and Page Push Notification Option.
 ![Screenshot](resources/img/image-4.png)
 
+Configuration New post Settings.
+![Screenshot](resources/img/image-3.png)
 
 # Getting Help
 
