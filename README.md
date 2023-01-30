@@ -16,6 +16,8 @@ You can configure the plugin to automatically send push notification to your sub
 Step 1 : You have to configure it from wp-admin > Push Notification >
 
 You will find a new tab “Push Notification”.
+
+Notification Setup option.
 ![Screenshot](resources/img/image-1.png)
 
 To create firebase account, Please follow below steps
@@ -24,13 +26,13 @@ To create firebase account, Please follow below steps
 3. When app platform appear, click the 'web' to create your app. Then follow the steps.
 4. After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.
 
-You should have to Use set a "Manual Push" in Push Notification tab under
+Send Manual Push 
 ![Screenshot](resources/img/image-2.png)
 
-And Last Setup 
+Configuration New post Settings.
 ![Screenshot](resources/img/image-3.png)
 
-And Last Setup 
+Post and Page Push Notification Option.
 ![Screenshot](resources/img/image-4.png)
 
 
