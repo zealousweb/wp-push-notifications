@@ -13,7 +13,6 @@ You can configure the plugin to automatically send push notification to your sub
 5. Click ‘Activate Plugin’ to activate it.
 
 # How To Use
-You have to configure it from wp-admin > Push Notification
 
 You will find a new tab “Push Notification”.
 
