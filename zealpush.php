@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name: ZealPush Notification For WordPress
+ * Plugin Name: Push Notifications For Web
  * Plugin URL: https://wordpress.org/plugin-url/
  * Description: Best platform for sending web push notifications.
- * Version: 1.0.0
+ * Version: 1.1
  * Author: ZealousWeb
  * Author URI: https://www.zealousweb.com
  * Developer: The Zealousweb Team
  * Developer E-Mail: opensource@zealousweb.com
- * Text Domain: zeal-push-notification
+ * Text Domain: push-notifications-for-web
  * Domain Path: /languages
  *
- * Copyright: © 2009-2021 ZealousWeb.
+ * Copyright: © 2009-2022 ZealousWeb.
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
@@ -23,11 +23,11 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * Basic plugin definitions
  *
  * @package Web Push Notification
- * @since 1.0
+ * @since 1.1
  */
 
 if ( !defined( 'ZPN_VERSION' ) ) {
-	define( 'ZPN_VERSION', '1.0.0' ); // Version of plugin
+	define( 'ZPN_VERSION', '1.1' ); // Version of plugin
 }
 
 if ( !defined( 'ZPN_FILE' ) ) {
