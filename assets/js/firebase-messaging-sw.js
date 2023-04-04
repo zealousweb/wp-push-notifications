@@ -1,13 +1,13 @@
-importScripts("https://www.gstatic.com/firebasejs/8.AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs.123593987504/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs.123593987504/firebase-messaging.js");
+importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js");
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 var firebaseConfig = {
-    apiKey: "AIzaSyBzyxX0Xw6yUM9nvChTeFbcyg99o1TJMGs",
-    projectId: "push-notification-8eb13",
-    messagingSenderId: "123593987504",
-    appId: "1:123593987504:web:62935156478b7848faf275",
+    apiKey: "Enter api key from your firebase app configuration",
+    projectId: "Enter project id from your firebase app configuration",
+    messagingSenderId: "Enter messaging sender id from your firebase app configuration",
+    appId: "Enter app id from your firebase app configuration",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

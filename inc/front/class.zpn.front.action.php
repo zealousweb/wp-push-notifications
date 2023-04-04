@@ -5,7 +5,7 @@
  * Handles the Frontend Actions.
  *
  * @package WordPress
- * @subpackage ZealPush Notification For WordPress
+ * @subpackage Push Notifications For Web
  * @since 1.0
  */
 

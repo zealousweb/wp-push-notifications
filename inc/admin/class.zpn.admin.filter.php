@@ -5,7 +5,7 @@
  * Handles the admin functionality.
  *
  * @package WordPress
- * @subpackage ZealPush Notification For WordPress
+ * @subpackage Push Notifications For Web
  * @since 1.0
  */
 
@@ -52,10 +52,10 @@ if ( !class_exists( 'ZPN_Admin_Filter' ) ) {
 
 			$settingPage = admin_url("admin.php?page=web_push");
 
-			$settingpageLink = '<a  href="'.$settingPage.'">' . __( 'Settings Page', 'zeal-push-notification' ) . '</a>';
+			$settingpageLink = '<a  href="'.$settingPage.'">' . __( 'Settings Page', 'push-notifications-for-web' ) . '</a>';
 			array_unshift( $links , $settingpageLink);
 
-			$documentLink = '<a target="_blank" href="'.ZPN_DOCUMENT.'">' . __( 'Document Link', 'zeal-push-notification' ) . '</a>';
+			$documentLink = '<a target="_blank" href="'.ZPN_DOCUMENT.'">' . __( 'Document Link', 'push-notifications-for-web' ) . '</a>';
 			array_unshift( $links , $documentLink);
 		
 			return $links;
