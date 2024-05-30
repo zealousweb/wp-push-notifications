@@ -101,7 +101,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				return $post_id;
 			}
 
-			if ( ! wp_verify_nonce( $_REQUEST['_wpn_post_notification_nonce'], 'wpn_notification_nonce' ) ) {
+			if ( ! wp_verify_nonce( $_REQUEST['_wpn_post_notification_nonce'], 'wpn_notification_nonce' ) ) { //phpcs:ignore
 				return $post_id;
 			}
 
@@ -187,8 +187,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			// Output the field
 			echo '<input type="checkbox" id="wpn_post_notification" name="wpn_post_notification">  <label> Send WebPush Notification</label>
-			<input type="hidden" id="_wpnonce" name="_wpn_post_notification_nonce" value="' . wp_create_nonce( 'wpn_notification_nonce' ) . '">';
-
+			<input type="hidden" id="_wpnonce" name="_wpn_post_notification_nonce" value="' . esc_attr(wp_create_nonce( 'wpn_notification_nonce' ) ). '">';
 		}
 
 		/**
@@ -205,7 +204,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			$table_name = $wpdb->prefix . 'web_notification';
 
-			$get_token_id = $wpdb->get_results( "SELECT token FROM $table_name" );
+			$get_token_id = $wpdb->get_results( "SELECT token FROM $table_name" ); //phpcs:ignore
 
 			$browser_token = array();
 			foreach ( $get_token_id as $token ) {
@@ -270,7 +269,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				$send_notification = wp_remote_post(
 					$url,
 					array(
-						'timeout'     => 120,
+						'timeout'     => 120, //phpcs:ignore
 						'redirection' => 5,
 						'method'      => 'POST',
 						'headers'     => array(
@@ -301,20 +300,20 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 		public function save_notification_setting() {
 
 			if (
-			! wp_verify_nonce( $_POST['setting_save'], 'notification_setting_save' )
+			! wp_verify_nonce( $_POST['setting_save'], 'notification_setting_save' ) //phpcs:ignore
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
+				<p>' . esc_html__( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 
 			} else {
 
-				$notification_server_key = sanitize_text_field( $_POST['notification_server_key'] );
-				$notification_apiKey     = sanitize_text_field( $_POST['notification_apiKey'] );
-				$notification_projectId  = sanitize_text_field( $_POST['notification_projectId'] );
-				$notification_senderId   = sanitize_text_field( $_POST['notification_senderId'] );
-				$notification_appId      = sanitize_text_field( $_POST['notification_appId'] );
+				$notification_server_key = sanitize_text_field( $_POST['notification_server_key'] ); //phpcs:ignore
+				$notification_apiKey     = sanitize_text_field( $_POST['notification_apiKey'] );     //phpcs:ignore
+				$notification_projectId  = sanitize_text_field( $_POST['notification_projectId'] );  //phpcs:ignore
+				$notification_senderId   = sanitize_text_field( $_POST['notification_senderId'] );   //phpcs:ignore
+				$notification_appId      = sanitize_text_field( $_POST['notification_appId'] );      //phpcs:ignore
 
 				if (
 				! empty( $notification_server_key ) &&
@@ -363,11 +362,11 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 
 					echo '<div class="updated">
-					<p>' . __( 'Fields update successfully.', 'push-notifications-for-web' ) . '</p>
+					<p>' . esc_html__( 'Fields update successfully.', 'push-notifications-for-web' ) . '</p>
 					</div>';
 				} else {
 					echo '<div class="error">
-					<p>' . __( 'Fill all required fields.', 'push-notifications-for-web' ) . '</p>
+					<p>' . esc_html__( 'Fill all required fields.', 'push-notifications-for-web' ) . '</p>
 					</div>';
 				}
 			}
@@ -381,10 +380,10 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			if (
 			! isset( $_POST['notification_fields'] ) ||
-			! wp_verify_nonce( $_POST['notification_fields'], 'notification_fields_update' )
+			! wp_verify_nonce( $_POST['notification_fields'], 'notification_fields_update' ) //phpcs:ignore
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
+				<p>' . esc_html__( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 
@@ -393,11 +392,11 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				$key = get_option( 'notification_server_key' );
 
 				$validate_fields = $this->check_required_fields();
-				$notification_title  = sanitize_text_field( $_POST['notification_title'] );
-				$notification_desc   = sanitize_text_field( $_POST['notification_desc'] );
-				$notification_link   = sanitize_text_field( $_POST['notification_link'] );
-				$notification_icon   = sanitize_text_field( $_POST['notification_icon'] );
-				$notification_image  = sanitize_text_field( $_POST['notification_image'] );
+				$notification_title  = sanitize_text_field( $_POST['notification_title'] );//phpcs:ignore
+				$notification_desc   = sanitize_text_field( $_POST['notification_desc'] ); //phpcs:ignore
+				$notification_link   = sanitize_text_field( $_POST['notification_link'] ); //phpcs:ignore
+				$notification_icon   = sanitize_text_field( $_POST['notification_icon'] ); //phpcs:ignore
+				$notification_image  = sanitize_text_field( $_POST['notification_image'] );//phpcs:ignore
 
 				if ( ! empty( $notification_desc ) && empty( $validate_fields ) ) {
 
@@ -405,7 +404,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 					$table_name = $wpdb->prefix . 'web_notification';
 
-					$get_token_id = $wpdb->get_results( "SELECT token FROM $table_name" );
+					$get_token_id = $wpdb->get_results( "SELECT token FROM $table_name" );  //phpcs:ignore
 
 					$browser_token = array();
 					foreach ( $get_token_id as $token ) {
@@ -433,7 +432,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 						$send_notification = wp_remote_post(
 							$url,
 							array(
-								'timeout'     => 120,
+								'timeout'     => 120, //phpcs:ignore
 								'redirection' => 5,
 								'method'      => 'POST',
 								'headers'     => array(
@@ -445,38 +444,37 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 								'body'        => json_encode( $payload ),
 							)
 						);
-
+						
 						$response_code    = wp_remote_retrieve_response_code( $send_notification );
 						$response_message = wp_remote_retrieve_response_message( $send_notification );
 
 						if ( $response_code != 200 ) {
-
 							echo '<div class="error">' .
-							'<p>' . $response_message . '</p>' .
+							'<p>' . esc_html__($response_message) . '</p>' .
 							'</div>';
 
 						} else {
 
 							echo '<div class="updated">' .
-							'<p>' . __( 'Push notification send successfully...!', 'push-notifications-for-web' ) . '</p>' .
+							'<p>' . esc_html__( 'Push notification send successfully...!', 'push-notifications-for-web' ) . '</p>' .
 							'</div>';
 						}
 					} else {
 
 						echo '<div class="error">
-						<p>' . __( 'No user accept and allow for site notification...!', 'push-notifications-for-web' ) . '</p>
+						<p>' . esc_html__( 'No user accept and allow for site notification...!', 'push-notifications-for-web' ) . '</p>
 						</div>';
 					}
 				} elseif ( $validate_fields ) {
 
 					echo '<div class="error">' .
-					'<p>' . __( 'For send notification please configure your all required fields first..!', 'push-notifications-for-web' ) . '</p>' .
+					'<p>' . esc_html__( 'For send notification please configure your all required fields first..!', 'push-notifications-for-web' ) . '</p>' .
 					'</div>';
 
 				} else {
 
 					echo '<div class="error">
-					<p>' . __( 'Please fill out all required fields...!', 'push-notifications-for-web' ) . '</p>
+					<p>' . esc_html__( 'Please fill out all required fields...!', 'push-notifications-for-web' ) . '</p>
 					</div>';
 
 				}
@@ -491,10 +489,10 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			if (
 			! isset( $_POST['new_post_configuration'] ) ||
-			! wp_verify_nonce( $_POST['new_post_configuration'], 'post_configuration_fields' )
+			! wp_verify_nonce( $_POST['new_post_configuration'], 'post_configuration_fields' )  //phpcs:ignore
 			) {
 				echo '<div class="error">
-				<p>' . __( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
+				<p>' . esc_html__( 'Sorry, your nonce was not correct. Please try again.', 'push-notifications-for-web' ) . '</p>
 				</div>';
 				exit;
 

@@ -3,7 +3,7 @@
  * Plugin Name: Push Notifications For Web
  * Plugin URL: https://wordpress.org/plugin-url/
  * Description: Best platform for sending web push notifications.
- * Version: 1.1
+ * Version: 1.2
  * Author: ZealousWeb
  * Author URI: https://www.zealousweb.com
  * Developer: The Zealousweb Team
@@ -16,7 +16,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// Exit if accessed directly
+// Exit if accessed directly 
 if ( !defined( 'ABSPATH' ) ) exit; 
 
 /**
@@ -27,7 +27,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  */
 
 if ( !defined( 'ZPN_VERSION' ) ) {
-	define( 'ZPN_VERSION', '1.1' ); // Version of plugin
+	define( 'ZPN_VERSION', '1.2' ); // Version of plugin
 }
 
 if ( !defined( 'ZPN_FILE' ) ) {
