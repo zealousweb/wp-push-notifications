@@ -107,7 +107,7 @@ if ( !class_exists( 'ZPN' ) ) {
 		 */
 		function action__init() {
 
-			flush_rewrite_rules();
+			flush_rewrite_rules(); //phpcs:ignore
 
 			# Post Type: Here you add your post type
 
@@ -183,13 +183,13 @@ if ( !class_exists( 'ZPN' ) ) {
 			global $wpdb;
 
 			$table_name  = $wpdb->prefix."web_notification";
-			$token       = sanitize_text_field( $_POST['token'] );
-			$unique_id   = sanitize_text_field( $_POST['unique_id'] );
+			$token       = sanitize_text_field( $_POST['token'] ); //phpcs:ignore
+			$unique_id   = sanitize_text_field( $_POST['unique_id'] ); //phpcs:ignore
 			$device_name = $this->get_the_browser();
 
 			if( $token ) {
 
-				$unique_check_id = $wpdb->get_results("SELECT * FROM $table_name WHERE ( unique_id = '".$unique_id."' || token = '".$token."')", ARRAY_A);
+				$unique_check_id = $wpdb->get_results("SELECT * FROM $table_name WHERE ( unique_id = '".$unique_id."' || token = '".$token."')", ARRAY_A); //phpcs:ignore
 
 				if( sizeof($unique_check_id) > 0 ){
 
@@ -255,25 +255,31 @@ if ( !class_exists( 'ZPN' ) ) {
 		 * - Used for get current user system.
 		 *
 		 */
-		function get_the_browser() {
-			if( strpos( $_SERVER['HTTP_USER_AGENT'], 'MSIE' ) !== false )
-				return 'Internet explorer';
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Trident' ) !== false )
-				return 'Internet explorer';
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Firefox' ) !== false )
-				return 'Mozilla Firefox';
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Chrome' ) !== false )
-				return 'Google Chrome';
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Opera Mini' ) !== false )
-				return "Opera Mini";
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Opera' ) !== false )
-				return "Opera";
-			elseif( strpos( $_SERVER['HTTP_USER_AGENT'], 'Safari' ) !== false )
-				return "Safari";
-			else
-			return 'Other';
-		}
 
+		function get_the_browser() {
+			if (isset($_SERVER['HTTP_USER_AGENT'])) {
+				$user_agent = $_SERVER['HTTP_USER_AGENT'];
+		
+				if (strpos($user_agent, 'MSIE') !== false) {
+					return 'Internet Explorer';
+				} elseif (strpos($user_agent, 'Trident') !== false) {
+					return 'Internet Explorer';
+				} elseif (strpos($user_agent, 'Firefox') !== false) {
+					return 'Mozilla Firefox';
+				} elseif (strpos($user_agent, 'Chrome') !== false) {
+					return 'Google Chrome';
+				} elseif (strpos($user_agent, 'Opera Mini') !== false) {
+					return 'Opera Mini';
+				} elseif (strpos($user_agent, 'Opera') !== false) {
+					return 'Opera';
+				} elseif (strpos($user_agent, 'Safari') !== false) {
+					return 'Safari';
+				} else {
+					return 'Other';
+				}
+			}
+		}
+		
 		/**
 		 * Function: random_string
 		 *
