@@ -42,12 +42,12 @@ if(isset( $_GET["tab"] ) ) {
 		} ?>
 		
 		<div class="basic_hint">
-			<b><?php echo esc_html__( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br>
+			<b><?php echo __( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br> <!--phpcs:ignore-->
 			<ol>
-				<li><?php echo esc_html__( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?>
+				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
+				<li><?php echo __( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
+				<li><?php echo __( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
+				<li><?php echo __( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
 			</ol>
 		</div>
 
@@ -105,12 +105,12 @@ if(isset( $_GET["tab"] ) ) {
 		} ?>
 
 		<div class="basic_hint">
-			<b><?php echo esc_html__( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br>
+			<b><?php echo __( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br><!--phpcs:ignore-->
 			<ol>
-				<li><?php echo esc_html__( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?>
-				<li><?php echo esc_html__( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?>
+				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
+				<li><?php echo __( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
+				<li><?php echo __( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
+				<li><?php echo __( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
 			</ol>
 		</div>
 

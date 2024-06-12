@@ -4,7 +4,7 @@ Tags: web push notifications, push notifications, push notification, chrome push
 Requires at least: 6.3
 Tested up to: 6.5
 Requires PHP: 5.6
-Stable tag: 1.2
+Stable tag: 1.5
 License: GPLv3 or later License
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,7 @@ Push Notifications For Web is the new standard in web push notifications. We are
 * Supports all popular browser such as **Chrome** (Desktop & Android), **Firefox** (Desktop & Android), **Microsoft Edge** (Desktop & Android) web browsers.
 * Supports HTTPS sites.
 * Automatic Notifications - Automatically send notifications to visitors every time you publish a new post. 
+* Compatibility of WordPress VIP.
 
 == Frequently Asked Questions ==
 
@@ -53,10 +54,25 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 
 == Upgrade Notice ==
 
+= 1.5 =
+- Backend Bugs Resolved and Improved compatibility with WordPress VIP platform by refactoring code to adhere to VIP coding standards.
+
 = 1.2 =
 - Initial release of the plugin
 
 == Changelog ==
+
+= 1.5 =
+- Backend Bugs Resolved.
+
+= 1.4 =
+- Frontend and Backend Bugs Resolved.
+
+= 1.3 =
+- Improved compatibility with WordPress VIP platform by refactoring code to adhere to VIP coding standards.
+
+= 1.2 =
+- Backend side issue fixed.
 
 = 1.0 =
 - Initial release of the plugin
