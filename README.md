@@ -5,6 +5,17 @@ Once you have set it up, your site visitors will start seeing opt-in message to 
 
 You can configure the plugin to automatically send push notification to your subscribers any time you publish a new post. You can also also view your subscriber useful user reports (such as browser).
 
+**Company**
+
+Push Notifications For Web is the new standard in web push notifications. We are trusted by thousands of developers & marketers in small to large companies from around the world for their push notification needs.
+
+**Features**
+
+Supports all popular browser such as **Chrome** (Desktop & Android), **Firefox** (Desktop & Android), **Microsoft Edge** (Desktop & Android) web browsers.
+Supports HTTPS sites.
+Automatic Notifications – Automatically send notifications to visitors every time you publish a new post.
+Compatibility of WordPress VIP.
+
 # Installation
 1. Download the plugin zip file from WordPress.org plugin site to your desktop / PC
 2. If the file is downloaded as a zip archive, extract the plugin folder to your desktop.
