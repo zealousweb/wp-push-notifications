@@ -11,10 +11,10 @@ Push Notifications For Web is the new standard in web push notifications. We are
 
 **Features**
 
-Supports all popular browser such as **Chrome** (Desktop & Android), **Firefox** (Desktop & Android), **Microsoft Edge** (Desktop & Android) web browsers.
-Supports HTTPS sites.
-Automatic Notifications – Automatically send notifications to visitors every time you publish a new post.
-Compatibility of WordPress VIP.
+- Supports all popular browser such as **Chrome** (Desktop & Android), **Firefox** (Desktop & Android), **Microsoft Edge** (Desktop & Android) web browsers.
+- Supports HTTPS sites.
+- Automatic Notifications – Automatically send notifications to visitors every time you publish a new post.
+- Compatibility of WordPress VIP.
 
 # Installation
 1. Download the plugin zip file from WordPress.org plugin site to your desktop / PC
