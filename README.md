@@ -51,4 +51,4 @@ Post and Page Push Notification Option.
 
 # Getting Help
 
-If you have any difficulties while using this Plugin, please feel free to contact us at opensource@zealousweb.com. We also offer custom WordPress extension development and WordPress theme design services to fulfill your objectives. Our professional dy‐ namic WordPress experts provide profound and customer-oriented development of your project within short timeframes. Thank you for choosing a Plugin developed by ZealousWeb!
+If you have any difficulties while using this Plugin, please feel free to contact us at support@zealousweb.com. We also offer custom WordPress extension development and WordPress theme design services to fulfill your objectives. Our professional dy‐ namic WordPress experts provide profound and customer-oriented development of your project within short timeframes. Thank you for choosing a Plugin developed by ZealousWeb!
