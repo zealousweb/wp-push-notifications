@@ -208,7 +208,6 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			$notification_jsonfile = get_option('notification_jsonfile');
 
-			 // echo "<br>";
 			// Convert the URL to the absolute file path
 			$upload_dir = wp_upload_dir(); // Get the WordPress uploads directory
 			$file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $notification_jsonfile);
