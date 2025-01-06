@@ -206,9 +206,9 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 		 */
 		 function get_firebase_access_token() {
 
-			 $service_account_file = ZPN_DIR .'/inc/lib/fir-sample-test-493a5-firebase-adminsdk-enpmh-5edfd60622.json'; // Replace with the path to your JSON file
-			 $notification_jsonfile = get_option('notification_jsonfile');
+			$notification_jsonfile = get_option('notification_jsonfile');
 
+			 // echo "<br>";
 			// Convert the URL to the absolute file path
 			$upload_dir = wp_upload_dir(); // Get the WordPress uploads directory
 			$file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $notification_jsonfile);
@@ -219,7 +219,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			    </div>';
 			    return null;
 			}
-		     $service_account = json_decode(file_get_contents($service_account_file), true);
+		     $service_account = json_decode(file_get_contents($file_path), true);
 
 		     $jwt_header = json_encode(['alg' => 'RS256', 'typ' => 'JWT']);
 		     $jwt_claim = json_encode([
@@ -423,7 +423,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 				$file_name = sanitize_file_name($notification_jsonfile['name']);
 				$file_type = wp_check_filetype($file_name, $allowed_types);
-				
+
 				// Validate file size
 				$max_file_size = 2 * 1024 * 1024; // 2MB
 
