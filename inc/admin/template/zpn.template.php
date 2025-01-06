@@ -35,32 +35,39 @@ if(isset( $_GET["tab"] ) ) {
 	</h2>
 
 	<?php
-	if( !isset( $_GET["tab"] ) ){
+	if( !isset( $_GET["tab"] ) && isset( $_GET['page'] ) == 'web_push' ) {
+
 		$nonce_field = wp_nonce_field( 'save_notification_setting_action', 'save_notification_setting_nonce', true, false );
+
 		if( isset( $_POST['save_notification_setting_nonce'] ) && wp_verify_nonce( $_POST['save_notification_setting_nonce'], 'save_notification_setting_action' ) && isset( $_POST['configuration'] ) && $_POST['configuration'] === 'true' ){
 			$this->save_notification_setting();
-		} ?>
-		
+		}
+
+		if( isset( $_POST['configuration'] )  && $_POST['configuration'] === 'true' ){
+			$this->save_notification_setting();
+		}
+		?>
+
 		<div class="basic_hint">
 			<b><?php echo __( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br> <!--phpcs:ignore-->
 			<ol>
-				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
+				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/' target='_blank'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
 				<li><?php echo __( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
 				<li><?php echo __( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
 				<li><?php echo __( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?><!--phpcs:ignore-->
 			</ol>
 		</div>
 
-		<form method="POST" autocomplete="off" class="configuration">
+		<form method="POST" autocomplete="off" class="configuration" enctype="multipart/form-data">
 			<input type="hidden" name="configuration" value="true" />
 			<?php wp_nonce_field( 'notification_setting_save', 'setting_save' ); ?>
 			<table class="form-table">
 				<tbody>
 					<tr>
-						<th><label for="notification_server_key"><?php echo esc_html__( 'Server key', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<th><label for="notification_server_key"><?php echo esc_html__( 'vapidKey/Key pair', 'push-notifications-for-web' ).' *'; ?></label></th>
 						<td>
 							<input name="notification_server_key" id="notification_server_key" type="text" value="<?php echo esc_attr(get_option('notification_server_key') ) ; ?>" class="regular-text" required/><br>
-							<b></be><?php echo esc_html__( "Enter server key from your firebase app configuration. e.g: AAAAHMbG.. You'll be able to get it from firebase app: settings -> Cloud Messaging section.", "push-notifications-for-web" ); ?></b>
+							<b></be><?php echo esc_html__( "Enter vapidKey/Key pair from your firebase app configuration. You'll be able to get it from firebase app: Project settings -> Cloud Messaging section.", "push-notifications-for-web" ); ?></b>
 						</td>
 					</tr>
 					<tr>
@@ -71,10 +78,24 @@ if(isset( $_GET["tab"] ) ) {
 						</td>
 					</tr>
 					<tr>
+						<th><label for="notification_authDomain"><?php echo esc_html__( 'authDomain', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<td>
+							<input name="notification_authDomain" id="notification_authDomain" type="text" value="<?php echo esc_attr(get_option('notification_authDomain') ) ; ?>" class="regular-text" required/><br>
+							<b></be><?php echo esc_html__( "Enter authDomain key from your firebase app configuration. ", "push-notifications-for-web" ); ?></b>
+						</td>
+					</tr>
+					<tr>
 						<th><label for="notification_projectId"><?php echo esc_html__( 'Project Id', 'push-notifications-for-web' ).' *'; ?></label></th>
 						<td>
 							<input name="notification_projectId" id="notification_projectId" type="text" value="<?php echo esc_attr(get_option('notification_projectId') ); ?>" class="regular-text" required/><br>
 							<b><?php echo esc_html__( 'Enter project id from your firebase app configuration. e.g: push-notification', 'push-notifications-for-web' ); ?></b>
+						</td>
+					</tr>
+					<tr>
+						<th><label for="notification_storageBucket"><?php echo esc_html__( 'storageBucket', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<td>
+							<input name="notification_storageBucket" id="notification_storageBucket" type="text" value="<?php echo esc_attr(get_option('notification_storageBucket') ); ?>" class="regular-text" required/><br>
+							<b><?php echo esc_html__( 'Enter storageBucket id from your firebase app configuration.', 'push-notifications-for-web' ); ?></b>
 						</td>
 					</tr>
 					<tr>
@@ -91,6 +112,26 @@ if(isset( $_GET["tab"] ) ) {
 							<b><?php echo esc_html__( 'Enter app id from your firebase app configuration. e.g: 1:123593936504:web:62935156478b7848faf275', 'push-notifications-for-web' ); ?></b>
 						</td>
 					</tr>
+					<tr>
+						<th><label for="notification_jsonfile"><?php echo esc_html__( 'json File', 'push-notifications-for-web' ).' *'; ?></label></th>
+
+						<?php $notification_jsonfile = esc_url(get_option('notification_jsonfile') ); ?>
+						<td>
+						    <?php if ($notification_jsonfile) { ?>
+					        <span class="dashicons dashicons-media-text"></span>
+					        <a href="#" id="remove-json-file" class="button button-secondary">
+					            <?php echo esc_html__('Remove File', 'push-notifications-for-web'); ?>
+					        </a>
+					        <p class="file-info">
+					            <b><?php echo esc_html__('Uploaded File:', 'push-notifications-for-web') . ' ' . basename($notification_jsonfile); ?></b>
+					        </p>
+						    <?php } else { ?>
+					        <input name="notification_jsonfile" id="notification_jsonfile" type="file" class="regular-text" required />
+					        <br>
+					        <b><?php echo esc_html__("Upload JSON file from your Firebase app configuration. You'll be able to get it from firebase app: Project settings -> Service Accounts -> Click on Generate new Private Key button.", 'push-notifications-for-web'); ?></b>
+						    <?php } ?>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<p class="submit">
@@ -98,32 +139,32 @@ if(isset( $_GET["tab"] ) ) {
 			</p>
 		</form>
 
-	<?php }elseif( isset( $_GET["tab"] ) && $_GET["tab"] == "zealwpn-setup" ){
+	<?php } elseif ( isset( $_GET["tab"] ) && $_GET["tab"] == "zealwpn-setup" ){
 
-		if( isset( $_POST['configuration'] )  && $_POST['configuration'] === 'true' ){ 
+		if( isset( $_POST['configuration'] )  && $_POST['configuration'] === 'true' ){
 			$this->save_notification_setting();
 		} ?>
 
 		<div class="basic_hint">
 			<b><?php echo __( 'To create firebase account, Please follow below steps', 'push-notifications-for-web' ); ?></b></br><!--phpcs:ignore-->
 			<ol>
-				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
+				<li><?php echo __( "Please register on - <a href='https://console.firebase.google.com/' target='_blank'>https://console.firebase.google.com/</a> and create a project</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
 				<li><?php echo __( "After creating project on firebase, create a APP by clicking on 'Add app' button</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
 				<li><?php echo __( "When app platform appear, click the 'web' to create your app. Then follow the steps.</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
 				<li><?php echo __( "After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.</li>", "push-notifications-for-web" ); ?> <!--phpcs:ignore-->
 			</ol>
 		</div>
 
-		<form method="POST" autocomplete="off" class="configuration">
+		<form method="POST" autocomplete="off" class="configuration" enctype="multipart/form-data">
 			<input type="hidden" name="configuration" value="true" />
 			<?php wp_nonce_field( 'notification_setting_save', 'setting_save' ); ?>
 			<table class="form-table">
 				<tbody>
 					<tr>
-						<th><label for="notification_server_key"><?php echo esc_html__( 'Server key', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<th><label for="notification_server_key"><?php echo esc_html__( 'vapidKey/Key pair', 'push-notifications-for-web' ).' *'; ?></label></th>
 						<td>
 							<input name="notification_server_key" id="notification_server_key" type="text" value="<?php echo esc_attr(get_option('notification_server_key') ); ?>" class="regular-text" required/><br>
-							<b></be><?php echo esc_html__( "Enter server key from your firebase app configuration. e.g: AAAAHMbG.. You'll be able to get it from firebase app: settings -> Cloud Messaging section.", "push-notifications-for-web" ); ?></b>
+							<b></be><?php echo esc_html__( "Enter vapidKey/Key pair from your firebase app configuration. You'll be able to get it from firebase app: Project settings -> Cloud Messaging section.", "push-notifications-for-web" ); ?></b>
 						</td>
 					</tr>
 					<tr>
@@ -134,10 +175,24 @@ if(isset( $_GET["tab"] ) ) {
 						</td>
 					</tr>
 					<tr>
+						<th><label for="notification_authDomain"><?php echo esc_html__( 'authDomain', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<td>
+							<input name="notification_authDomain" id="notification_authDomain" type="text" value="<?php echo esc_attr(get_option('notification_authDomain') ) ; ?>" class="regular-text" required/><br>
+							<b></be><?php echo esc_html__( "Enter authDomain key from your firebase app configuration. ", "push-notifications-for-web" ); ?></b>
+						</td>
+					</tr>
+					<tr>
 						<th><label for="notification_projectId"><?php echo esc_html__( 'Project Id', 'push-notifications-for-web' ).' *'; ?></label></th>
 						<td>
 							<input name="notification_projectId" id="notification_projectId" type="text" value="<?php echo esc_attr(get_option('notification_projectId') ); ?>" class="regular-text" required/><br>
 							<b><?php echo esc_html__( 'Enter project id from your firebase app configuration. e.g: push-notification', 'push-notifications-for-web' ); ?></b>
+						</td>
+					</tr>
+					<tr>
+						<th><label for="notification_storageBucket"><?php echo esc_html__( 'storageBucket', 'push-notifications-for-web' ).' *'; ?></label></th>
+						<td>
+							<input name="notification_storageBucket" id="notification_storageBucket" type="text" value="<?php echo esc_attr(get_option('notification_storageBucket') ); ?>" class="regular-text" required/><br>
+							<b><?php echo esc_html__( 'Enter storageBucket id from your firebase app configuration.', 'push-notifications-for-web' ); ?></b>
 						</td>
 					</tr>
 					<tr>
@@ -154,6 +209,26 @@ if(isset( $_GET["tab"] ) ) {
 							<b><?php echo esc_html__( 'Enter app id from your firebase app configuration. e.g: 1:123593936504:web:62935156478b7848faf275', 'push-notifications-for-web' ); ?></b>
 						</td>
 					</tr>
+					<tr>
+						<th><label for="notification_jsonfile"><?php echo esc_html__( 'json File', 'push-notifications-for-web' ).' *'; ?></label></th>
+
+						<?php $notification_jsonfile = esc_url(get_option('notification_jsonfile') ); ?>
+						<td>
+						    <?php if ($notification_jsonfile) { ?>
+					        <span class="dashicons dashicons-media-text"></span>
+					        <a href="#" id="remove-json-file" class="button button-secondary">
+					            <?php echo esc_html__('Remove File', 'push-notifications-for-web'); ?>
+					        </a>
+					        <p class="file-info">
+					            <b><?php echo esc_html__('Uploaded File:', 'push-notifications-for-web') . ' ' . basename($notification_jsonfile); ?></b>
+					        </p>
+						    <?php } else { ?>
+					        <input name="notification_jsonfile" id="notification_jsonfile" type="file" class="regular-text" required />
+					        <br>
+					        <b><?php echo esc_html__("Upload JSON file from your Firebase app configuration. You'll be able to get it from firebase app: Project settings -> Service Accounts -> Click on Generate new Private Key button.", 'push-notifications-for-web'); ?></b>
+						    <?php } ?>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 			<p class="submit">
@@ -165,7 +240,7 @@ if(isset( $_GET["tab"] ) ) {
 
 	if( isset( $_GET["tab"] ) && $_GET["tab"] == "zealwpn-send-notification" ) {
 
-		if( isset($_POST['send_notification']) && $_POST['send_notification'] === 'true' ){ 
+		if( isset($_POST['send_notification']) && $_POST['send_notification'] === 'true' ){
 			$this->send_push_notification_manually();
 		} ?>
 
@@ -190,7 +265,7 @@ if(isset( $_GET["tab"] ) ) {
 					</tr>
 					<tr>
 						<th><label for="notification_link"><?php echo esc_html__( 'Notification Link', 'push-notifications-for-web' ); ?></label></th>
-						<td><input name="notification_link" id="notification_link" type="url" value="https://www.google.com" class="regular-text" required/></td>
+						<td><input name="notification_link" id="notification_link" type="url" value="<?php echo get_site_url(); ?>" class="regular-text" required/></td>
 					</tr>
 					<tr>
 						<th>
@@ -251,7 +326,7 @@ if(isset( $_GET["tab"] ) ) {
 							<input type="checkbox" name="wpn_enable_for_post" id="wpn_enable_for_post" <?php echo esc_attr(get_option('wpn_enable_for_post') ) ? "checked":''; ?>>
 							<strong><?php echo esc_html__( 'Enable Web Push', 'push-notifications-for-web' ) ?></strong>
 						</td>
-					</tr>	
+					</tr>
 
 					<tr>
 						<th scope="row">
@@ -261,15 +336,15 @@ if(isset( $_GET["tab"] ) ) {
 							<span class="zealwpn-tooltip hide-if-no-js " id="wpn_post_icon"></span>
 						</th>
 						<td>
-							
+
 							<?php if( get_option('wpn_post_icon') ) { ?>
 								<a href="#" class="wpn_post_icon notificatio-img page-title-action">
 									<img src="<?php echo esc_url(wp_get_attachment_image_url( get_option('wpn_post_icon') )); ?>" width="150" height="150">
-								</a>	
+								</a>
 								<a href="#" class="notificatio-img-rmv page-title-action">Remove</a>
 							<?php } else { ?>
 								<a href="#" class="wpn_post_icon notificatio-img page-title-action">Upload</a>
-								<a href="#" class="notificatio-img-rmv page-title-action" style="display:none">Remove</a>	
+								<a href="#" class="notificatio-img-rmv page-title-action" style="display:none">Remove</a>
 							<?php } ?>
 							<input type="hidden" name="wpn_post_icon" class="wpn_post_img" value="<?php echo esc_attr(get_option('wpn_post_icon') ) ; ?>">
 
@@ -287,11 +362,11 @@ if(isset( $_GET["tab"] ) ) {
 							<?php if( get_option('wpn_post_image') ) { ?>
 								<a href="#" class="wpn_post_image notificatio-img page-title-action">
 									<img src="<?php echo esc_url(wp_get_attachment_image_url( get_option('wpn_post_image') ) ) ; ?>" width="150" height="150">
-								</a>	
+								</a>
 								<a href="#" class="notificatio-img-rmv page-title-action">Remove</a>
 							<?php } else { ?>
 								<a href="#" class="wpn_post_image notificatio-img page-title-action">Upload</a>
-								<a href="#" class="notificatio-img-rmv page-title-action" style="display:none">Remove</a>	
+								<a href="#" class="notificatio-img-rmv page-title-action" style="display:none">Remove</a>
 							<?php } ?>
 							<input type="hidden" name="wpn_post_image" class="wpn_post_img" value="<?php echo esc_attr(get_option('wpn_post_image') ) ; ?>">
 

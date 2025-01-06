@@ -2,7 +2,7 @@
 Contributors: zealopensource 
 Tags: web push notifications, push notifications, push notification, chrome push, firefox push
 Requires at least: 6.3
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.6
 Stable tag: 1.5
 License: GPLv3 or later License

@@ -25,16 +25,19 @@ jQuery( document ).ready( function( $ ) {
     TokenElem = document.getElementById("token");
 
     // Initialize Firebase
+
     var config = {
         'apiKey': zealwpn_object.notification_apiKey,
+        'authDomain': zealwpn_object.notification_authDomain,
         'projectId': zealwpn_object.notification_projectId,
+        'storageBucket': zealwpn_object.notification_storageBucket,
         'messagingSenderId': zealwpn_object.notification_senderId,
         'appId': zealwpn_object.notification_appId,
     };
     firebase.initializeApp(config);
     firebase.analytics();
 
-    const messaging = firebase.messaging();    
+    const messaging = firebase.messaging();
 
     navigator.serviceWorker.register(zealwpn_object.pluginsUrl + 'assets/js/firebase-messaging-sw.js')
     .then(function (registration) {
@@ -51,6 +54,7 @@ jQuery( document ).ready( function( $ ) {
                     if (token) {
                         var token = token;
                         saveToken(token); // Save token in db
+                        alert(token);
                     } else {
                         console.log('No Instance ID token available. Request permission to generate one.');
                     }
@@ -59,7 +63,7 @@ jQuery( document ).ready( function( $ ) {
                 })
                 .catch(function(error) {
                     /** If some error happens while fetching the token then handle here */
-                    
+
                     console.log('Error while fetching the token ' + error);
                 });
             })
@@ -78,7 +82,7 @@ jQuery( document ).ready( function( $ ) {
     messaging.onTokenRefresh(function() {
         messaging.getToken()
         .then(function(renewedToken) {
-         
+
             if (renewedToken) {
                 var token = renewedToken;
                 saveToken(token); // Save token in db
@@ -99,7 +103,7 @@ jQuery( document ).ready( function( $ ) {
     // Handle incoming messages
     messaging.onMessage(function(payload) {
 
-        const timestamp = 42; 
+        const timestamp = 42;
 
         var notificationTitle = payload.data.title;
         const notificationOptions = {

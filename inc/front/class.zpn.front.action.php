@@ -52,8 +52,10 @@ if ( !class_exists( 'ZPN_Front_Action' ) ){
 					'ajax_url'                      => admin_url( 'admin-ajax.php' ),
 					'pluginsUrl'                    => ZPN_URL,
 					'notification_server_key'       => get_option('notification_server_key'),
+					'notification_authDomain'       => get_option('notification_authDomain'),
 					'notification_apiKey'           => get_option('notification_apiKey'),
 					'notification_projectId'        => get_option('notification_projectId'),
+					'notification_storageBucket'    => get_option('notification_storageBucket'),
 					'notification_senderId'         => get_option('notification_senderId'),
 					'notification_appId'            => get_option('notification_appId'),
 				)

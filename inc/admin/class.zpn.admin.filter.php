@@ -21,6 +21,7 @@ if ( !class_exists( 'ZPN_Admin_Filter' ) ) {
 
 		function __construct() {
 			add_filter( 'plugin_action_links_'.ZPN_PLUGIN_BASENAME,	array( $this,'filter__zealwpn_admin_plugin_links'), 10, 2 );
+			add_filter( 'upload_mimes', array( $this, 'filter__zealwpn_allow_json_uploads'));
 		}
 
 		/*
@@ -41,7 +42,7 @@ if ( !class_exists( 'ZPN_Admin_Filter' ) ) {
 		* @method filter__zealwpn_admin_plugin_links
 		*
 		* @param  array $actions
-		*	
+		*
 		* @return string
 		*/
 		function filter__zealwpn_admin_plugin_links( $links, $file ) {
@@ -57,10 +58,25 @@ if ( !class_exists( 'ZPN_Admin_Filter' ) ) {
 
 			$documentLink = '<a target="_blank" href="'.ZPN_DOCUMENT.'">' . __( 'Document Link', 'push-notifications-for-web' ) . '</a>';
 			array_unshift( $links , $documentLink);
-		
+
 			return $links;
 		}
 
+		/**
+		* Filter: upload_mimes
+		*
+		* - Used to upload json file.
+		*
+		* @method filter__zealwpn_allow_json_uploads
+		*
+		* @param  array $actions
+		*
+		* @return string
+		*/
+		function filter__zealwpn_allow_json_uploads($mimes) {
+        	$mimes['json'] = 'application/json';
+        	return $mimes;
+    	}
 
 		/*
 		######## ##     ## ##    ##  ######  ######## ####  #######  ##    ##  ######
