@@ -317,7 +317,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				$device_name = $token->device_name;
 				$tokenDB = $token->token;
 
-				if( $device_name == 'Google Chrome' || $device_name == 'Mozilla Firefox'){
+				
 					// Notification payload for mobile webpush ONLY
 					$payload = [
 						'message' => [
@@ -331,33 +331,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 							'token' => $tokenDB
 						]
 					];
-				} else {
 
-					$payload = [
-						'message' => [
-							'token' => $tokenDB,
-							'notification' => [
-								'title' => $post_title,
-								'body' => stripslashes( $post_message ),
-								'image' => $post_image
-							],
-							"apns" => [
-								"payload" => [
-									"aps" => [
-										"mutable-content" => 1
-									],
-									"image_url" => $post_image,
-								]
-							],
-							"data"=> [
-								'image' => $post_image,
-								"post_id" => $post_id,
-								"icon" => $post_icon,
-								"click_action" => get_the_permalink( $post_id ),
-							],
-						]
-					];
-				}
 
 				$response = wp_remote_post($url, [
 			        'headers' => [
