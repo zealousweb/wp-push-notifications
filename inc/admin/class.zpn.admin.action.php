@@ -208,6 +208,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 
 			$notification_jsonfile = get_option('notification_jsonfile');
 
+			 // echo "<br>";
 			// Convert the URL to the absolute file path
 			$upload_dir = wp_upload_dir(); // Get the WordPress uploads directory
 			$file_path = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $notification_jsonfile);
@@ -218,8 +219,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			    </div>';
 			    return null;
 			}
-
-			 $service_account = json_decode(file_get_contents($file_path), true);
+		     $service_account = json_decode(file_get_contents($file_path), true);
 
 		     $jwt_header = json_encode(['alg' => 'RS256', 'typ' => 'JWT']);
 		     $jwt_claim = json_encode([
@@ -407,27 +407,59 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				$notification_storageBucket  = sanitize_text_field( $_POST['notification_storageBucket'] );  //phpcs:ignore
 				$notification_senderId   	 = sanitize_text_field( $_POST['notification_senderId'] );   //phpcs:ignore
 				$notification_appId      	 = sanitize_text_field( $_POST['notification_appId'] );      //phpcs:ignore
-				$notification_jsonfile		 = $_FILES['notification_jsonfile'];
-
-				$notification_jsonfile_url   = sanitize_text_field( get_option( 'notification_jsonfile' ) );
-
-				if( isset( $notification_jsonfile ) ){
-					$notification_jsonfile = $notification_jsonfile;
-				} else {
-					$notification_jsonfile = $notification_jsonfile_url;
-				}
+				$notification_jsonfile 		 = isset($_FILES['notification_jsonfile']) ? $_FILES['notification_jsonfile'] : null;
+				$notification_jsonfile_url 	 = sanitize_text_field(get_option('notification_jsonfile'));
 
 				$allowed_types = [
-			    	'json' => 'application/json',
+				    'json' => 'application/json',
 				];
-
-				$file_name = sanitize_file_name($notification_jsonfile['name']);
-				$file_type = wp_check_filetype($file_name, $allowed_types);
 
 				// Validate file size
 				$max_file_size = 2 * 1024 * 1024; // 2MB
 
+				$has_error = false;
+
+				if ($notification_jsonfile && ! empty($notification_jsonfile['tmp_name'])) {
+				    $file_name = sanitize_file_name($notification_jsonfile['name']);
+				    $file_type = wp_check_filetype($file_name, $allowed_types);
+
+				    if ($notification_jsonfile['size'] > $max_file_size) {
+				        echo '<div class="error">
+				        <p>' . esc_html__('JSON file size exceeds the allowed limit of 2MB.', 'push-notifications-for-web') . '</p>
+				        </div>';
+				        $has_error = true;
+				    } elseif ($file_type['ext'] !== 'json' || $file_type['type'] !== 'application/json') {
+				        echo '<div class="error">
+				        <p>' . esc_html__('Invalid file type. Only JSON files are allowed.', 'push-notifications-for-web') . '</p>
+				        </div>';
+				        $has_error = true;
+				    } else {
+				        // File is valid; proceed with uploading
+				        $upload = wp_handle_upload($notification_jsonfile, ['test_form' => false]);
+				        if (isset($upload['url'])) {
+				            $notification_jsonfile_url = $upload['url']; // Use the uploaded file URL
+				        }
+				    }
+				} else {
+				    if (!empty($notification_jsonfile_url)) {
+				        // Use the existing URL from options
+				        $file_type = wp_check_filetype($notification_jsonfile_url, $allowed_types);
+				        if ($file_type['ext'] !== 'json' || $file_type['type'] !== 'application/json') {
+				            echo '<div class="error">
+				            <p>' . esc_html__('The existing file is not a valid JSON file.', 'push-notifications-for-web') . '</p>
+				            </div>';
+				            $has_error = true;
+				        }
+				    } else {
+				        echo '<div class="error">
+				        <p>' . esc_html__('No file uploaded and no existing file found.', 'push-notifications-for-web') . '</p>
+				        </div>';
+				        $has_error = true;
+				    }
+				}
+
 				if (
+					! $has_error &&
 				    ! empty( $notification_server_key ) &&
 				    ! empty( $notification_authDomain ) &&
 				    ! empty( $notification_apiKey ) &&
@@ -435,24 +467,8 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 				    ! empty( $notification_storageBucket ) &&
 				    ! empty( $notification_senderId ) &&
 				    ! empty( $notification_appId ) &&
-			        (
-						(
-							$notification_jsonfile['size'] < $max_file_size && $notification_jsonfile['type'] == 'application/json'
-						) && ! empty( $notification_jsonfile )
-					)
+				    ! empty( $notification_jsonfile_url )
 				) {
-
-					if (!empty($notification_jsonfile['tmp_name'])) {
-				        $upload = wp_handle_upload( $notification_jsonfile, ['test_form' => false]);
-
-				        if (isset($upload['url'], $upload['file'])) {
-				            $notification_jsonfile_url = $upload['url']; // URL of uploaded file
-				            $notification_jsonfile_path = $upload['file']; // Path of uploaded file
-
-				            // Save the file URL in the options table
-				            update_option('notification_jsonfile', $notification_jsonfile_url);
-				        }
-					}
 
 					$filename = ZPN_DIR . '/assets/js/firebase-messaging-sw.js';
 
@@ -506,6 +522,7 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 					update_option( 'notification_storageBucket', $notification_storageBucket );
 					update_option( 'notification_senderId', $notification_senderId );
 					update_option( 'notification_appId', $notification_appId );
+					update_option( 'notification_jsonfile', $notification_jsonfile_url);
 
 					echo '<div class="updated">
 					<p>' . esc_html__( 'Fields update successfully.', 'push-notifications-for-web' ) . '</p>
@@ -525,24 +542,6 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 					) {
 						echo '<div class="error">
 						<p>' . esc_html__( 'Fill all required fields.', 'push-notifications-for-web' ) . '</p>
-						</div>';
-					}
-
-					if(
-						! isset( $notification_jsonfile ) ||
-						$file_type['ext'] !== 'json' ||
-						$file_type['type'] !== 'application/json'
-					) {
-						echo '<div class="error">
-						<p>' . esc_html__( 'Invalid file type. Only JSON files are allowed.', 'push-notifications-for-web' ) . '</p>
-						</div>';
-					}
-
-					if(
-						$notification_jsonfile['size'] > $max_file_size
-					){
-						echo '<div class="error">
-						<p>' . esc_html__( 'JSON file size exceeds the allowed limit of 2MB.', 'push-notifications-for-web' ) . '</p>
 						</div>';
 					}
 
