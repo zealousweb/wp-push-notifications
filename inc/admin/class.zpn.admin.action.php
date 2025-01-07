@@ -218,7 +218,8 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 			    </div>';
 			    return null;
 			}
-		     $service_account = json_decode(file_get_contents($file_path), true);
+
+			 $service_account = json_decode(file_get_contents($file_path), true);
 
 		     $jwt_header = json_encode(['alg' => 'RS256', 'typ' => 'JWT']);
 		     $jwt_claim = json_encode([
