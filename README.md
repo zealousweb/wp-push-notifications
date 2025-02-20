@@ -5,21 +5,21 @@ Once you have set it up, your site visitors will start seeing opt-in message to 
 
 You can configure the plugin to automatically send push notification to your subscribers any time you publish a new post. You can also also view your subscriber useful user reports (such as browser).
 
-Company
+**Company**
 
 Push Notifications For Web is the new standard in web push notifications. We are trusted by thousands of developers & marketers in small to large companies from around the world for their push notification needs.
 
-Features
+**Features**
 
-- Supports all popular browser such as Chrome (Desktop & Android), Firefox (Desktop & Android), Microsoft Edge (Desktop & Android) web browsers.
+- Supports all popular browser such as **Chrome** (Desktop & Android), **Firefox** (Desktop & Android), **Microsoft Edge** (Desktop & Android) web browsers.
 - Supports HTTPS sites.
 - Automatic Notifications – Automatically send notifications to visitors every time you publish a new post.
 - Compatibility of WordPress VIP.
 
 # Installation
-1. Download the plugin zip file from WordPress.org plugin site to your desktop  PC
+1. Download the plugin zip file from WordPress.org plugin site to your desktop / PC
 2. If the file is downloaded as a zip archive, extract the plugin folder to your desktop.
-3. With your FTP program, upload the plugin folder to the wp-contentplugins folder in your WordPress directory online
+3. With your FTP program, upload the plugin folder to the wp-content/plugins folder in your WordPress directory online
 4. Go to the Plugin screen and find the newly uploaded Plugin in the list.
 5. Click ‘Activate Plugin’ to activate it.
 
@@ -29,25 +29,25 @@ You will find a new tab “Push Notification”.
 
 Notification Setup option.
 
-![Screenshot](resourcesimgimage-1.png)
+![Screenshot](resources/img/image-1.png)
 
 To create firebase account, Please follow below steps
-1. Please register on - httpsconsole.firebase.google.com and create a project
+1. Please register on - https://console.firebase.google.com/ and create a project
 2. After creating project on firebase, create a APP by clicking on 'Add app' button
 3. When app platform appear, click the 'web' to create your app. Then follow the steps.
 4. After registered your app, you will see the following configuration field's value. Get these and setup the following configuration.
 
 Send Manual Push 
 
-![Screenshot](resourcesimgimage-2.png)
+![Screenshot](resources/img/image-2.png)
 
 Configuration New post Settings.
 
-![Screenshot](resourcesimgimage-4.png)
+![Screenshot](resources/img/image-4.png)
 
 Post and Page Push Notification Option.
 
-![Screenshot](resourcesimgimage-3.png)
+![Screenshot](resources/img/image-3.png)
 
 # Getting Help
 
