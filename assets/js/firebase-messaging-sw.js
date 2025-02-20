@@ -4,10 +4,12 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js");
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 var firebaseConfig = {
-    apiKey: "Enter api key from your firebase app configuration",
-    projectId: "Enter project id from your firebase app configuration",
-    messagingSenderId: "Enter messaging sender id from your firebase app configuration",
-    appId: "Enter app id from your firebase app configuration",
+    apiKey: "AIzaSyAfAuMe-bXrs93bY0WHB-ampAMVIv7e5cs",
+    authDomain: "healthcare-e42d6.firebaseapp.com",
+    projectId: "healthcare-e42d6",
+    storageBucket: "healthcare-e42d6.firebasestorage.app",
+    messagingSenderId: "267227979368",
+    appId: "1:267227979368:web:778b32af9bc92dbf6025dd",
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -35,8 +37,8 @@ messaging.onBackgroundMessage(function(payload) {
         data: {
             click_action: payload.data.click_action,
             image: payload.data.image,
-        }   
-    };  
+        }
+    };
 
     // Event when click on notification
     self.addEventListener('notificationclick', function(payload) {
@@ -75,8 +77,8 @@ messaging.setBackgroundMessageHandler(function(payload) {
         data: {
             click_action: payload.data.click_action,
             image: payload.data.image,
-        }  
-    };  
+        }
+    };
 
     // Event when click on notification
     self.addEventListener('notificationclick', function(payload) {

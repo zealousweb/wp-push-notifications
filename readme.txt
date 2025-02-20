@@ -2,9 +2,9 @@
 Contributors: zealopensource 
 Tags: web push notifications, push notifications, push notification, chrome push, firefox push
 Requires at least: 6.3
-Tested up to: 6.7
+Tested up to: 6.6
 Requires PHP: 5.6
-Stable tag: 1.6
+Stable tag: 1.5
 License: GPLv3 or later License
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -53,9 +53,6 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 4. Configuration New Post Settings.
 
 == Upgrade Notice ==
-
-= 1.6 =
-- Minor workflow adjustments
 
 = 1.5 =
 - Backend Bugs Resolved and Improved compatibility with WordPress VIP platform by refactoring code to adhere to VIP coding standards.
