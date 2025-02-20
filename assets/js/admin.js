@@ -3,9 +3,9 @@
 
 	// Show Image Gallery and prview of selected image
 	$(document).on( 'click', '.notificatio-img', function(e){
- 
+
 		e.preventDefault();
- 
+
 		var button = $(this),
 		custom_uploader = wp.media({
 			title: 'Insert image',
@@ -23,18 +23,26 @@
 				button.next().show();
 				button.html('<img src="' + attachment.url + '">').next().next().show();
 				button.next().next().val(attachment.id);
-			} else { 
+			} else {
 				alert( 'Uploaded image is not supported, please try with new one...!' )
 			}
 		}).open();
- 
+
 	});
- 
+
+	$(document).on('submit', '.set_configuration', function(e) {
+		var iconValue = $('.wpn_post_img').val();
+		if (!iconValue) {
+			e.preventDefault();
+			alert('Please upload a notification icon before submitting the form.');
+		}
+	});
+
 	// Remove uploaded images for notification
 	$(document).on('click', '.notificatio-img-rmv', function(e){
- 
+
 		e.preventDefault();
- 
+
 		var button = $(this);
 		button.next().val(''); // emptying the hidden field
 		button.hide().prev().html('Upload');
@@ -78,6 +86,22 @@
 		} ).pointer('open');
 	});
 
-	
+	jQuery(document).ready(function ($) {
+	   const removeButton = $('#remove-json-file');
+	   if (removeButton.length) {
+		   removeButton.on('click', function (e) {
+			   e.preventDefault();
 
-} )( jQuery );
+			   const parentTd = $(this).closest('td');
+			   const message = "Upload JSON file from your Firebase app configuration. You'll be able to get it from firebase app: Project settings -> Service Accounts -> Click on Generate new Private Key button.";  // Fallback message
+
+			   parentTd.html(
+				   <input name="notification_jsonfile" id="notification_jsonfile" type="file" class="regular-text" required />
+				   <br>
+				   <b>${message}</b>
+			   );
+		   });
+	   }
+   });
+
+})(jQuery);

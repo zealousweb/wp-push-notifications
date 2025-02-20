@@ -138,13 +138,21 @@ if ( !class_exists( 'ZPN' ) ) {
 
 			require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 			dbDelta( $sql );
-			
+
 			$filename = ZPN_DIR . '/assets/js/firebase-messaging-sw.js';
-			
-			$notification_apiKey     = sanitize_text_field( get_option( 'notification_apiKey' ) );
-			$notification_projectId  = sanitize_text_field( get_option( 'notification_projectId' ) );
-			$notification_senderId   = sanitize_text_field( get_option( 'notification_senderId' ) );
-			$notification_appId      = sanitize_text_field( get_option( 'notification_appId' ) );
+
+			$notification_authDomain    = sanitize_text_field( get_option( 'notification_authDomain' ) );
+			$notification_apiKey     	= sanitize_text_field( get_option( 'notification_apiKey' ) );
+			$notification_projectId  	= sanitize_text_field( get_option( 'notification_projectId' ) );
+			$notification_storageBucket = sanitize_text_field( get_option( 'notification_storageBucket' ) );
+			$notification_senderId   	= sanitize_text_field( get_option( 'notification_senderId' ) );
+			$notification_appId      	= sanitize_text_field( get_option( 'notification_appId' ) );
+
+			if( $notification_authDomain ) {
+				$this->replace_sw_file_string( $filename, 'Enter authdoamin key from your firebase app configuration', $notification_authDomain );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter authdoamin key from your firebase app configuration', 'Enter authdoamin key from your firebase app configuration' );
+			}
 
 			if( $notification_apiKey ) {
 				$this->replace_sw_file_string( $filename, 'Enter api key from your firebase app configuration', $notification_apiKey );
@@ -156,6 +164,12 @@ if ( !class_exists( 'ZPN' ) ) {
 				$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', $notification_projectId );
 			} else {
 				$this->replace_sw_file_string( $filename, 'Enter project id from your firebase app configuration', 'Enter project id from your firebase app configuration' );
+			}
+
+			if( $notification_storageBucket ) {
+				$this->replace_sw_file_string( $filename, 'Enter storageBucket id from your firebase app configuration', $notification_storageBucket );
+			} else {
+				$this->replace_sw_file_string( $filename, 'Enter storageBucket id from your firebase app configuration', 'Enter storageBucket id from your firebase app configuration' );
 			}
 
 			if( $notification_senderId ) {
@@ -259,7 +273,7 @@ if ( !class_exists( 'ZPN' ) ) {
 		function get_the_browser() {
 			if (isset($_SERVER['HTTP_USER_AGENT'])) {
 				$user_agent = $_SERVER['HTTP_USER_AGENT'];
-		
+
 				if (strpos($user_agent, 'MSIE') !== false) {
 					return 'Internet Explorer';
 				} elseif (strpos($user_agent, 'Trident') !== false) {
@@ -279,7 +293,7 @@ if ( !class_exists( 'ZPN' ) ) {
 				}
 			}
 		}
-		
+
 		/**
 		 * Function: random_string
 		 *
