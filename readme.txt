@@ -68,6 +68,12 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 
 == Changelog ==
 
+= 1.7 =
+- API Update
+
+= 1.6 =
+- Minor workflow adjustments
+
 = 1.5 =
 - Backend Bugs Resolved.
 
