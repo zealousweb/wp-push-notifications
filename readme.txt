@@ -2,9 +2,9 @@
 Contributors: zealopensource 
 Tags: web push notifications, push notifications, push notification, chrome push, firefox push
 Requires at least: 6.3
-Tested up to: 6.7.2
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.7
+Stable tag: 1.8
 License: GPLv3 or later License
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,9 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 
 == Upgrade Notice ==
 
+= 1.8 =
+- Minor Bug fixed
+
 = 1.7 =
 - API Update
 
@@ -67,6 +70,9 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 - Initial release of the plugin
 
 == Changelog ==
+
+= 1.8 =
+- Minor Bug fixed
 
 = 1.7 =
 - API Update
