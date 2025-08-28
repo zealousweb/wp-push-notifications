@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Push Notifications For Web
  * Plugin URL: https://wordpress.org/plugin-url/
- * Description: 1Best platform for sending web push notifications.
+ * Description: Best platform for sending web push notifications.
  * Version: 2.0
  * Author: ZealousWeb
  * Author URI: https://www.zealousweb.com
