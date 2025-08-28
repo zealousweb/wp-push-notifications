@@ -641,11 +641,12 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 						<p>' . esc_html__( 'No user accept and allow for site notification...!', 'push-notifications-for-web' ) . '</p>
 						</div>';
 					}
-
-					if(in_array('200', $response_code)){
-						echo '<div class="updated">' .
-						'<p>' . esc_html__( 'Push notification has been sent successfully...!', 'push-notifications-for-web' ) . '</p>' .
-						'</div>';
+					if( isset( $response_code ) ) {
+						if(in_array('200', $response_code)){
+							echo '<div class="updated">' .
+							'<p>' . esc_html__( 'Push notification has been sent successfully...!', 'push-notifications-for-web' ) . '</p>' .
+							'</div>';
+						}
 					}
 
 
@@ -742,3 +743,4 @@ if ( ! class_exists( 'ZPN_Admin_Action' ) ) {
 	);
 
 }
+
