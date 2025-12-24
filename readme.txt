@@ -98,6 +98,12 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 
 == Changelog ==
 
+= 2.1 =
+- Tested with the latest version of WordPress (6.9).
+
+= 2.0 =
+- Bug fixed.
+
 = 1.9 =
 - Minor changes - Doc update
 
