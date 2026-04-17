@@ -27,7 +27,14 @@ if(isset( $_GET["tab"] ) ) {
 
 	<div id="icon-options-general" class="icon32"></div>
 
-	<h2><?php _e( "Web Push Notification", "push-notifications-for-web" ); ?></h2>
+	<div class="zpn-help-card">
+		<h1><?php _e( "Web Push Notification", "push-notifications-for-web" ); ?></h1>
+		<div class="zpn-help-card-footer">
+			<a class="zpn-primary-btn" href="https://support.zealousweb.com/portal/en/home" target="_blank" rel="noopener noreferrer">
+				<?php esc_html_e( 'Open Support Ticket', 'push-notifications-for-web' ); ?>
+			</a>
+		</div>
+	</div>
 	<h2 class="nav-tab-wrapper">
 		<a href="?page=web_push&tab=zealwpn-setup" class="nav-tab <?php if( $active_tab == 'zealwpn-setup' ){ echo 'nav-tab-active'; } ?> "><?php _e( 'Setup', 'push-notifications-for-web' ); ?></a>
 		<a href="?page=web_push&tab=zealwpn-send-notification" class="nav-tab <?php if( $active_tab == 'zealwpn-send-notification' ){ echo 'nav-tab-active'; } ?>"><?php _e( 'Manual Push', 'push-notifications-for-web' ); ?></a>
