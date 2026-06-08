@@ -99,7 +99,7 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 == Changelog ==
 
 = 2.1 =
-- Tested with the latest version of WordPress (6.9).
+- Added a new "Open Support Ticket" button to provide quick and direct access to support.
 
 = 2.0 =
 - Bug fixed.
