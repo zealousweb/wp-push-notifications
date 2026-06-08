@@ -2,7 +2,7 @@
 Contributors: zealopensource 
 Tags: web push notifications, push notifications, push notification, chrome push, firefox push
 Requires at least: 6.3
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 5.6
 Stable tag: 2.1
 License: GPLv3 or later License
@@ -73,7 +73,7 @@ That's it! Just configure your settings as you see fit, and you're on your way t
 == Upgrade Notice ==
 
 = 2.1 =
-- Tested with the latest version of WordPress (6.9).
+- Added a new "Open Support Ticket" button to provide quick and direct access to support.
 
 = 2.0 =
 - Bug fixed.
